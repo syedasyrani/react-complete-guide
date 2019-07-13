@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import classes from './App.css';
 import Validation from './components/Validation'
 import Person from './components/Person'
 
@@ -74,18 +74,19 @@ class App extends Component {
       );
     }
 
-    let classes = []
+    const assignedClasses = []
+    
     if (this.state.persons.length <= 2) {
-      classes.push('red')
+      assignedClasses.push(classes.red)
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
-        <p className={classes.join(' ')}>Hello World</p>
+      <div className={classes.App}>
+        <p className={assignedClasses.join(' ')}>Hello World</p>
         <button style={style} onClick={this.togglePersonsHandler}>Click Me</button>
         {persons}
       </div>
