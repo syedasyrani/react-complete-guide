@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Validation from './components/Validation'
 import Person from './components/Person'
+import ErrorBoundary from './components/ErrorBoundary'
 
 
 class App extends Component {
@@ -49,7 +50,7 @@ class App extends Component {
           { 
             this.state.persons.map((person, index) => {
               return (
-                <div key={index}>
+                <ErrorBoundary key={index}>
                   <Person
                     name={person.name} 
                     age={person.age} 
@@ -58,7 +59,7 @@ class App extends Component {
                   />
 
                   <Validation inputLength={person.name.length} />
-                </div>
+                </ErrorBoundary>
               )
             }) 
           }
