@@ -40,6 +40,14 @@ class App extends Component {
   }
 
   render() {
+    const style = {
+      backgroundColor: 'red',
+      color: 'white',
+      font: 'inherit',
+      border: '1px solid #aaa',
+      padding: '8px',
+      cursor: 'pointer'
+    }
 
     let persons = null;
 
@@ -66,10 +74,19 @@ class App extends Component {
       );
     }
 
+    let classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push('red')
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
+    }
+
     return (
       <div className="App">
         <p className={classes.join(' ')}>Hello World</p>
-        <button onClick={this.togglePersonsHandler}>Click Me</button>
+        <button style={style} onClick={this.togglePersonsHandler}>Click Me</button>
         {persons}
       </div>
     );
