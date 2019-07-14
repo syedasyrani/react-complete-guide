@@ -52,12 +52,7 @@ class App extends Component {
   toggleCockpitHandler = () => this.setState({ showCockpit: !this.state.showCockpit })
   togglePersonsHandler = () => this.setState({ showPersons: !this.state.showPersons })
 
-  deletePersonHandler = (personIndex) => {
-    const persons = [...this.state.persons]
-    // remove one element from the array
-    persons.splice(personIndex, 1)
-    this.setState({persons})
-  }
+  deletePersonHandler = id => this.setState({persons: [...this.state.persons].filter(person => person.id !== id)})
 
   render() {
     console.log('[App.js render]')
