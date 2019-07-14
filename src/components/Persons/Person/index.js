@@ -4,7 +4,7 @@ import classes from './Person.css'
 import './Person.css'
 
 const person = (props) => {
-    console.log(props);
+    console.log('[Person.js] rederinng...')
     return (
         <div className={classes.Person}>
             <button onClick={props.clicked}>Remove</button>
@@ -13,7 +13,7 @@ const person = (props) => {
             <span>name:</span>
             <input 
                 type="text" 
-                onChange={props.change} 
+                onChange={props.changed} 
                 value={props.name || ''} />
         </div>
     )
