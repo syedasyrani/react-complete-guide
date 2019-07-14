@@ -5,9 +5,9 @@ import ErrorBoundary from '../../ErrorBoundary'
 import Validation from '../../Validation'
 
 class Person extends Component {
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return nextProps.person !== this.props.person ? true : false
-    // }
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.person === this.props.person ? true : false
+    }
 
     render() { 
         console.log('[Person.js] rendering....')
