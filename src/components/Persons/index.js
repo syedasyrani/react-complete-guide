@@ -8,7 +8,7 @@ const persons = props => props.persons.map((person, index) => (
             <Person
                 name={person.name} 
                 age={person.age} 
-                change={e => props.changed(props.person, e)}
+                change={e => props.changed(person, e)}
                 click={() => props.clicked(index)}
             />
 

@@ -18,9 +18,10 @@ class App extends Component {
   }
 
   attributeChangeHandler = (personObj, event) => {
+    console.log(personObj);
     const updatedState = [];
     
-    this.state.persons.map((person, index) => {
+    this.state.persons.map(person => {
       person.name = personObj.id === person.id ? event.target.value : person.name
 
       return updatedState.push(person)
@@ -41,18 +42,20 @@ class App extends Component {
   render() {
     let persons = null
 
-    persons = <Persons 
+    if (this.state.showPersons) {
+      persons = <Persons 
           persons={this.state.persons} 
           clicked={this.deletePersonHandler} 
           changed={this.attributeChangeHandler} />
-
+    }
+    
     return (
       <div className={classes.App}>
         <Cockpit 
           persons={this.state.persons} 
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler} />
-        {persons}
+        { persons }
       </div>
     );
   }

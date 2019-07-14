@@ -4,12 +4,17 @@ import classes from './Person.css'
 import './Person.css'
 
 const person = (props) => {
+    console.log(props);
     return (
         <div className={classes.Person}>
-            <button onClick={props.click}>Remove</button>
+            <button onClick={props.clicked}>Remove</button>
             <p>I am {props.name} and I am {props.age}'s years old</p>
             <p>{props.children}</p>
-            <span>name:</span> <input type="text" onChange={props.change} value={props.name || ''} />
+            <span>name:</span>
+            <input 
+                type="text" 
+                onChange={props.change} 
+                value={props.name || ''} />
         </div>
     )
 }
