@@ -14,12 +14,10 @@ class App extends Component {
     persons: [
       { id: 1, name: 'Ahmad', age: 18 },
       { id: 2, name: 'Mok', age: 27 },
-      { id: 3, name: 'Amar', age: 23 },
-      { id: 4, name: 'Keith', age: 25 },
-      { id: 5, name: 'Scott', age: 27 },
-      { id: 6, name: 'Mahi', age: 21  },
+      { id: 3, name: 'Amar', age: 23 }
     ],
-    showPersons: true
+    showPersons: true,
+    showCockpit: true
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -28,21 +26,30 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
+    console.log('[App.js] componentDidMount')
   }
 
-  attributeChangeHandler = (personObj, event) => {
+  shouldComponentUpdate() {
+    console.log('[App.js] shouldComponentUpdate')
+    return true
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate')
+  }
+
+  nameChangeHandler = (personObj, event) => {
     const updatedState = [];
-    
     this.state.persons.map(person => {
       person.name = personObj.id === person.id ? event.target.value : person.name
 
       return updatedState.push(person)
     }) 
-
-    this.setState({ person: updatedState })
+    console.log(updatedState)
+    this.setState({ persons: updatedState })
   }
 
+  toggleCockpitHandler = () => this.setState({ showCockpit: !this.state.showCockpit })
   togglePersonsHandler = () => this.setState({ showPersons: !this.state.showPersons })
 
   deletePersonHandler = (personIndex) => {
@@ -60,15 +67,20 @@ class App extends Component {
       persons = <Persons 
           persons={this.state.persons} 
           clicked={this.deletePersonHandler} 
-          changed={this.attributeChangeHandler} />
+          changed={this.nameChangeHandler} />
     }
     
     return (
       <div className={classes.App}>
-        <Cockpit 
-          persons={this.state.persons} 
-          showPersons={this.state.showPersons}
-          clicked={this.togglePersonsHandler} />
+        <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Remove Cockpit</button>
+        {
+          this.state.showCockpit 
+            ? <Cockpit 
+                persons={this.state.persons} 
+                showPersons={this.state.showPersons}
+                clicked={this.togglePersonsHandler} />
+            : null
+        }
         { persons }
       </div>
     );

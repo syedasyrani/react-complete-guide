@@ -1,25 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react'
 import Person from './Person'
-import ErrorBoundary from '../ErrorBoundary'
-import Validation from '../Validation'
 
-const persons = props => {
-    console.log('[Persons.js] rederinng...')
-    
-    return (
-        props.persons.map((person, index) => (
-            <ErrorBoundary key={index}>
-                <Person
-                    name={person.name} 
-                    age={person.age} 
-                    clicked={() => props.clicked(index)}
-                    changed={e => props.changed(person, e)}
-                />
 
-                <Validation inputLength={person.name.length} />
-            </ErrorBoundary>
+class Persons extends Component {
+    // static getDerivedStateFromProps(props, state) {
+    //     console.log('[Persons.js] getDerivedStateFromProps')
+    //     return state
+    // }
+
+    // componentWillReceiveProps(props) {
+    //     console.log('[Persons.js] componentWillReceiveProps', props)
+    // }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[Persons.js] shouldComponentUpdate')
+        // return true
+        return nextProps.persons !== this.props.persons ? true : false
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('[Persons.js] getSnapshotBeforeUpdate')
+        return {message: 'Snapshot'};
+    }
+
+    // componentWillUpdate() {
+    //     console.log('[Persons.js] componentWillUpdate')
+    // }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[Persons.js] componentDidUpdate')
+        console.log(snapshot)
+    }
+
+    componentWillUnmount() {
+        console.log('[Persons.js] componentWillUnmount')
+    }
+
+    render() { 
+        console.log('[Persons.js] rederinng...')
+        return this.props.persons.map(person => (
+            <Person
+                key={person.id}
+                person={person}
+                clicked={this.props.clicked}
+                changed={this.props.changed}
+            />
         ))
-    ) 
+    }
 }
-
-export default persons
+ 
+export default Persons
