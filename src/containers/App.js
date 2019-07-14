@@ -38,21 +38,23 @@ class App extends Component {
     console.log('[App.js] componentDidUpdate')
   }
 
-  nameChangeHandler = (personObj, event) => {
-    const updatedState = [];
-    this.state.persons.map(person => {
-      person.name = personObj.id === person.id ? event.target.value : person.name
-
-      return updatedState.push(person)
-    }) 
-    console.log(updatedState)
-    this.setState({ persons: updatedState })
-  }
-
+  /**
+   * Handler functions
+   */
   toggleCockpitHandler = () => this.setState({ showCockpit: !this.state.showCockpit })
   togglePersonsHandler = () => this.setState({ showPersons: !this.state.showPersons })
+  deletePersonHandler  = id => this.setState({ persons: [...this.state.persons].filter(person => person.id !== id) })
 
-  deletePersonHandler = id => this.setState({persons: [...this.state.persons].filter(person => person.id !== id)})
+  nameChangeHandler = (id, event) => {
+    const persons = [...this.state.persons];
+    const index   = persons.findIndex(x => x.id === id)
+
+    persons[index].name = event.target.value
+
+    console.log(persons[index])
+
+    this.setState({ persons })
+  }
 
   render() {
     console.log('[App.js render]')

@@ -5,9 +5,9 @@ import ErrorBoundary from '../../ErrorBoundary'
 import Validation from '../../Validation'
 
 class Person extends Component {
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.person !== this.props.person ? true : false
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return nextProps.person !== this.props.person ? true : false
+    // }
 
     render() { 
         console.log('[Person.js] rendering....')
@@ -20,7 +20,7 @@ class Person extends Component {
                 <span>name:</span>
                 <input 
                     type="text" 
-                    onChange={e => this.props.changed(this.props.person, e)} 
+                    onChange={e => this.props.changed(this.props.person.id, e)} 
                     value={this.props.person.name || ''} />
                 <Validation inputLength={this.props.person.name.length} />
             </div>
